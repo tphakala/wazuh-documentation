@@ -6,7 +6,7 @@
     <meta name="author" content="Wazuh" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta property="og:image" content="https://documentation.wazuh.com/current/_static/img/wazuh-docs-card.png" />
+    <meta property="og:image" content="https://documentation.wazuh.com/current/../_static/img/wazuh-docs-card.png" />
     <meta property="og:url" content="https://documentation.wazuh.com/guide.html" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Documentation index guide · Wazuh documentation" />
@@ -16,28 +16,34 @@
     <meta name="twitter:creator" content="@wazuh" />
     <meta name="twitter:title" content="Documentation index guide · Wazuh documentation" />
     <meta name="twitter:description" content="User manual, installation and configuration guides. Learn how to get the most out of the Wazuh platform." />
-    <meta name="twitter:image" content="https://documentation.wazuh.com/current/_static/img/wazuh-docs-card.png" />
+    <meta name="twitter:image" content="https://documentation.wazuh.com/current/../_static/img/wazuh-docs-card.png" />
     
     <!-- TODO: check these css files -->
     <title>Wazuh documentation guide</title>
-    <link class="from-static" rel="stylesheet" href="_static/css/fontawesome.min.css?ver=1603177953.6796598" type="text/css" />
-    <link class="from-static" rel="stylesheet" href="_static/css/wazuh-icons.min.css?ver=1603177953.6846526" type="text/css" />
+    <link class="from-static" rel="stylesheet" href="../_static/css/fontawesome.min.css?ver=1603177953.6796598" type="text/css" />
+    <link class="from-static" rel="stylesheet" href="../_static/css/wazuh-icons.min.css?ver=1603177953.6846526" type="text/css" />
     <link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Montserrat:400,500|Open+Sans:400,700|Fira+Mono' type='text/css' media='all' />
-    <link class="from-static" rel="shortcut icon" href="_static/favicon.ico"/>
+    <link class="from-static" rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="stylesheet" href="guide.css">
   </head>
 
   <body>
+      
+    <!-- <a id="btn-scroll" href="#" title="Back to top">
+      <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+    </a> -->
+    
     <header id="page-header">
-      <div id="menu" role="banner" class="container">
-        <nav id="main-navbar">
+      
+      <div id="menu" role="banner">
+        <nav class="container" id="main-navbar">
           <div id="links-to-home">
             <a class="wazuh-logo-link" href="https://wazuh.com" title="Wazuh">
-              <img class="img-responsive from-static" src=_static/img/wazuh_logo_w.png alt="Wazuh" />
+              <img class="img-responsive from-static" src=../_static/img/wazuh_logo_w.png alt="Wazuh" />
             </a>
             <a class="docs-link"  href="index.html">Docs</a>
           </div>
-          <div id="navbarWebMenu">
+          <div id="navbarWebMenu" class="collapsed">
             <ul id="menu-header-menuweb" class="nav">
               <li class="menu-item nav-item"><a class="nav-link" href=https://wazuh.com/product/>Product</a></li>
               <li class="menu-item nav-item"><a class="nav-link" href=https://wazuh.com/cloud/>Cloud</a></li>
@@ -56,15 +62,22 @@
             </ul>
           </div>
         </nav>
-        <div  class="search-bar" role="search">
-          <form method="get" class="searchform" action="current/search.html" id="search-form">
-            <div class="search-input-wrapper">
-              <input type="text" class="form-control" name="q" placeholder="Search our documentation"></input>
-            </div>
-            <button type="submit" class="btn-search"><i class="fa fa-search"></i></button>
-            <input type="hidden" name="check_keywords" value="yes" />
-            <input type="hidden" name="area" value="default" />
-          </form>
+        <div class="container" id="header-sticky">
+          <div class="navbar-open navbar-expand-lg navbar-dark">
+            <button class="navbar-toggler btn-close collapsed" type="button" data-toggle="collapse" data-target="#navbar-globaltoc" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="x" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div  class="search-bar" role="search">
+            <form method="get" class="searchform" action="current/search.html" id="search-form">
+              <div class="search-input-wrapper">
+                <input type="text" class="form-control" name="q" placeholder="Search our documentation"></input>
+              </div>
+              <button type="submit" class="btn-search"><i class="fa fa-search"></i></button>
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+          </div>
         </div>
         
       </div>
