@@ -6,7 +6,7 @@
     <meta name="author" content="Wazuh" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta property="og:image" content="https://documentation.wazuh.com/current/../_static/img/wazuh-docs-card.png" />
+    <meta property="og:image" content="https://documentation.wazuh.com/current/_static/img/wazuh-docs-card.png" />
     <meta property="og:url" content="https://documentation.wazuh.com/guide.html" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Documentation index guide · Wazuh documentation" />
@@ -16,15 +16,29 @@
     <meta name="twitter:creator" content="@wazuh" />
     <meta name="twitter:title" content="Documentation index guide · Wazuh documentation" />
     <meta name="twitter:description" content="User manual, installation and configuration guides. Learn how to get the most out of the Wazuh platform." />
-    <meta name="twitter:image" content="https://documentation.wazuh.com/current/../_static/img/wazuh-docs-card.png" />
+    <meta name="twitter:image" content="https://documentation.wazuh.com/current/_static/img/wazuh-docs-card.png" />
     
-    <!-- TODO: check these css files -->
     <title>Wazuh documentation guide</title>
-    <link class="from-static" rel="stylesheet" href="../_static/css/fontawesome.min.css?ver=1603177953.6796598" type="text/css" />
-    <link class="from-static" rel="stylesheet" href="../_static/css/wazuh-icons.min.css?ver=1603177953.6846526" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Montserrat:400,500|Open+Sans:400,700|Fira+Mono' type='text/css' media='all' />
-    <link class="from-static" rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="stylesheet" href="guide.css">
+    <link rel="shortcut icon" href="guide-assets/favicon.ico"/>
+    <link rel="stylesheet" href="guide-assets/guide.min.css?ver={{compilation_ts}}">
+    
+    {# Google Analytics #}
+
+    {% if production %}
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-65317123-3', 'auto');
+      ga('send', 'pageview');
+    </script>
+    {% else %}
+    <script></script> <!-- TODO: remove this else -->
+    {% endif %}
   </head>
 
   <body>
@@ -39,7 +53,7 @@
         <nav class="container" id="main-navbar">
           <div class="links-to-home">
             <a class="wazuh-logo-link" href="https://wazuh.com" title="Wazuh">
-              <img class="img-responsive from-static" src=../_static/img/wazuh_logo_w.png alt="Wazuh" />
+              <img class="img-responsive" src=guide-assets/wazuh_logo_w.png alt="Wazuh" />
             </a>
             <a class="docs-link"  href="index.html">Docs</a>
           </div>
@@ -65,7 +79,7 @@
         <div class="container" id="header-sticky">
           <div class="links-to-home">
             <a class="wazuh-logo-link" href="https://wazuh.com" title="Wazuh">
-              <img class="img-responsive from-static" src=../_static/img/wazuh_logo_w.png alt="Wazuh" />
+              <img class="img-responsive" src=guide-assets/wazuh_logo_w.png alt="Wazuh" />
             </a>
             <a class="docs-link"  href="index.html">Docs</a>
           </div>
@@ -182,10 +196,10 @@
     
     <footer>
       <div class="container">
-        &copy; <span id="copy-year"></span> &middot; Wazuh Inc.
+        {{copyright}}
       </div>
     </footer>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-    <script src="guide.js"></script>
+    <script src="guide-assets/guide.min.js?ver={{compilation_ts}}"></script>
   </body>
 </html>

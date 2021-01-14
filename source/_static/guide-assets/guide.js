@@ -33,9 +33,11 @@ $(function() {
     if (window.pageYOffset > sticky) {
       header.addClass('sticky');
       $('#navbarWebMenu').addClass('scrolled');
+      $('main').addClass('after-sticky');
     } else {
       header.removeClass('sticky');
       $('#navbarWebMenu').removeClass('scrolled');
+      $('main').removeClass('after-sticky');
     }
   }
 });

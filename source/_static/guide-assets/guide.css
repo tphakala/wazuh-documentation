@@ -17,7 +17,7 @@
 
 #page-header,
 #header-sticky.sticky {  
-  background: url(../_static/img/bg-guide.png), no-repeat #00a9e5;
+  background: url(guide-bg.png), no-repeat #00a9e5;
   background-size: 140%;
   background-position: center bottom;
 }
@@ -132,8 +132,8 @@
   width: 100%;
 }
 
-.sticky + main {
-  padding-top: 100px;
+main.after-sticky {
+  transition: padding-top ease-in 0.15s;
 }
 
 #header-sticky {
@@ -586,9 +586,3 @@ footer {
   }
   
 }
-/* 
-
-@media (min-width: 1440px) {
-  
-} */
-
