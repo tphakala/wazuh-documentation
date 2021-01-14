@@ -25,7 +25,7 @@ $(function() {
     }
   });
 
-
+  makeSticky();
   $(window).on('scroll', makeSticky );
 
   /** Make turn the header sticky **/

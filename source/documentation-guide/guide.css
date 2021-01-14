@@ -1,4 +1,4 @@
-html, body {
+.links-to-homehtml, body {
   margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
@@ -18,7 +18,7 @@ html, body {
 #page-header,
 #header-sticky.sticky {  
   background: url(../_static/img/bg-guide.png), no-repeat #00a9e5;
-  background-size: cover;
+  background-size: 140%;
   background-position: center bottom;
 }
   
@@ -26,6 +26,10 @@ html, body {
 #header-sticky {
   width: 100%;
 }
+
+#header-sticky > .links-to-home {
+  display: none;
+}  
 
 #menu {
   width: 100%;
@@ -97,18 +101,18 @@ html, body {
   margin-left: 1rem;
 }
 
-#links-to-home a,
+.links-to-home a,
 #navbarWebMenu a {
   color: #fff;
   text-decoration: none;
   vertical-align: middle;
 }
 
-#links-to-home .wazuh-logo-link {
+.links-to-home .wazuh-logo-link {
   display: inline-block;
 }
 
-#links-to-home .docs-link {
+.links-to-home .docs-link {
   display: inline-block;
   margin-left: 5px;
   line-height: 1em;
@@ -116,7 +120,7 @@ html, body {
   vertical-align: -2px;
 }
 
-#links-to-home .wazuh-logo-link img {
+.links-to-home .wazuh-logo-link img {
   max-height: unset;
   max-width: 110px;
 }
@@ -140,6 +144,7 @@ html, body {
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
+  z-index: 20;
 }
 
 #header-sticky .navbar-open {
@@ -372,16 +377,22 @@ footer {
   font-family: 'Open Sans', sans-serif;
 }
 
-@media (min-width:576px){
-  
-}
-
 @media (min-width: 768px){
+  
+  #page-header {
+    height: auto;
+  }
+  
   .container {
     padding-left: 30px;
     padding-right: 30px;
   }
   
+  #header-sticky.sticky >  .links-to-home {
+    width: 240px;
+    display: block;
+  }
+
   #main-navbar {
     height: 100px;
     display: flex;
@@ -389,53 +400,91 @@ footer {
     justify-content: space-between;
     align-items: center;
   }
-
-  #links-to-home {
-    max-width: 275px;
-  }
-  
-  #links-to-home .wazuh-logo-link img {
-    max-height: 40px;
-    max-width: unset;
-  }
   
   #navbarWebMenu {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    position: relative; 
+    height: auto;
+    top: auto;
+    background: transparent;
+    text-align: end;
+    line-height: 2;
   }
 
-  #navbarWebMenu ul li {
-    display: inline-block;
-    padding-left: 15px;
-    font-size: 1rem;
+  #navbarWebMenu.collapsed {
+    height: auto;
   }
   
-  .search-bar {
-    max-width: 600px;
+  #navbarWebMenu ul {
+    background: transparent;
+  }
+  
+  #navbarWebMenu ul li {
+    display: inline-block;
+    padding-left: 11px;
+    font-size: 1rem;
+    border: none;
+  }
+  
+  #navbarWebMenu ul li a {
+    color: #fff;
+    padding: 0;
+    font-size: .95rem;
+  }
+  
+  #navbarWebMenu .rrss a::after {
+    content: none;
+  }
+  
+  #header-sticky {
+    height: 102px;
+    transition: height ease-in 0.15s;
+  }
+  
+  #page-header, 
+  #header-sticky.sticky {
+    background-size: 100%;
+  }
+    
+  #header-sticky.sticky {
+    height: 50px;
+  }
+
+  #header-sticky .navbar-open {
+    display: none;
+  }
+  
+  #header-sticky:not(.sticky) .search-bar {
     margin: 0 auto;
     padding-top: 10px;
     padding-bottom: 40px;
+    padding-left: 0;
+    max-width: 500px;
+    width: 100%;
+    transition: height ease-in 0.15s;
   }
 
-  #search-form {
+  #header-sticky:not(.sticky) #search-form {
     display: flex;
     align-items: center;
     width: 100%;
     border-radius: 8px;
+    max-width: 500px;
   }
 
-  #search-form .search-input-wrapper {
+  #header-sticky:not(.sticky) #search-form .search-input-wrapper {
     width: calc(100% - 2.8rem);
   }
 
-  #search-form .form-control {
+  #header-sticky:not(.sticky) #search-form .form-control {
     border: none;
     padding: 10px 20px;
     line-height: 2rem;
     font-size: 1.2rem;
   }
   
-  .btn-search {
+  #header-sticky:not(.sticky) .btn-search {
     font-size: 1.2rem;
     height: 2.5rem;
     width: 2.5rem;
@@ -444,9 +493,13 @@ footer {
   .grid-container {
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
     margin: 40px 0 30px 0;
+  }
+  
+  section {
+    margin: 0;
   }
 
   #guide-quick-start {
@@ -455,6 +508,7 @@ footer {
 
   #guide-community {
     grid-row: span 1;
+    grid-row-start: 2;
   }
 
   #guide-use-cases {
@@ -463,10 +517,12 @@ footer {
 
   #guide-installation-guide {
     grid-row: span 2;
+    grid-column: span 2;
   }
 
   #guide-upgrade-guide {
     grid-row: span 1;
+    grid-column: span 2;
   }
 
   #guide-user-manual {
@@ -482,13 +538,55 @@ footer {
   }
 }
 
-/* @media (min-width: 992px){
+@media (min-width: 992px){
+  
+  #main-navbar > .links-to-home {
+    max-width: 275px;
+    width: auto;
+  }
+  
+  #main-navbar > .links-to-home .wazuh-logo-link img {
+    max-height: 35px;
+    max-width: unset;
+  }
+  
+  #navbarWebMenu {
+    flex-direction: row;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    margin: 40px 0 30px 0;
+  }
+  
+  #guide-community {
+    grid-row-start: auto;
+  }
+
+  #guide-installation-guide {
+    grid-column: span 1;
+  }
+
+  #guide-upgrade-guide {
+    grid-column: span 1;
+  }
   
 }
-
 @media (min-width: 1200px) {
   
+  #navbarWebMenu ul li {
+    padding-left: 15px;
+  }
+  
+  #navbarWebMenu ul li a {
+    font-size: 1rem;
+  }
+  
 }
+/* 
 
 @media (min-width: 1440px) {
   
