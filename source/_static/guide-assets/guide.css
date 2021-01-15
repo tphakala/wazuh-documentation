@@ -10,6 +10,12 @@
   box-sizing: border-box;
 }
 
+main .container {
+  max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #page-header {
   height: 100px;
   position: relative;
@@ -355,7 +361,7 @@ h2 .fas {
 
 section {
   border: 1px solid #f4f4f4;
-  padding: 30px;
+  padding: 10px 20px 2px;
   box-shadow: 4px 4px 8px #cecece;
   margin: 15px auto;
 }
@@ -366,7 +372,7 @@ main ul {
 }
 
 main ul li {
-  padding: 10px 0;
+  padding: 8px 0;
 }
 
 footer {

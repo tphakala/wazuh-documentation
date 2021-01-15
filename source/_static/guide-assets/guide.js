@@ -31,9 +31,11 @@ $(function() {
   /** Make turn the header sticky **/
   function makeSticky() {
     if (window.pageYOffset > sticky) {
-      header.addClass('sticky');
-      $('#navbarWebMenu').addClass('scrolled');
-      $('main').addClass('after-sticky');
+      if ($(document).height() > $(window).height() + sticky*2 ) {
+        header.addClass('sticky');
+        $('#navbarWebMenu').addClass('scrolled');
+        $('main').addClass('after-sticky');
+      }
     } else {
       header.removeClass('sticky');
       $('#navbarWebMenu').removeClass('scrolled');
