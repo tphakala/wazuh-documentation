@@ -1,5 +1,4 @@
 $(function() {
-  let loc = location.hash;
   const version = '' + $('[data-version]').data('version');
   const minVersionScreenshot = '3.13';
   const minVersionRedoc = '4.0';
@@ -14,10 +13,10 @@ $(function() {
   if ( useApiRedoc ) {
     /* Change DOMAIN in href */
     const domainReplacePattern = 'https://DOMAIN';
-    const url_root = $('[data-url_root]').data('url_root');
+    const urlRoot = $('[data-url_root]').data('url_root');
     $('[href^="'+domainReplacePattern+'/"]').each(function() {
       const oldHref = $(this).attr('href');
-      $(this).attr('href', oldHref.replace(domainReplacePattern+'/', url_root));
+      $(this).attr('href', oldHref.replace(domainReplacePattern+'/', urlRoot));
       $(this).attr('target', '_blank');
     });
   }
@@ -128,10 +127,7 @@ $(function() {
    */
   function checkScroll() {
     const scrollTop = $(document).scrollTop();
-    let headerHeight = 100;
-    if ($('#page').hasClass('no-latest-docs')) {
-      headerHeight += parseInt($('.no-latest-notice').outerHeight());
-    }
+    const headerHeight = parseInt($('#header').outerHeight());
     if (scrollTop >= headerHeight) {
       $('body').addClass('scrolled');
     } else {
@@ -141,7 +137,7 @@ $(function() {
 
   /* -- Menu scroll -------------------------------------------------------------------------------*/
 
-  const navbarTop = 100;
+  let navbarTop = parseInt($('#header').outerHeight());
   let noticeHeight = 0;
   if ($('#page').hasClass('no-latest-docs')) {
     noticeHeight = parseInt($('.no-latest-notice').outerHeight());
@@ -153,7 +149,6 @@ $(function() {
   let eventScroll;
 
   heightNavbar();
-  headerSticky();
 
   setTimeout(function() {
     if ($('#page').hasClass('no-latest-docs')) {
@@ -278,7 +273,6 @@ $(function() {
     navHeight = parseInt($('#globaltoc').outerHeight());
     /* Update height of navbar */
     heightNavbar();
-    headerSticky();
   });
 
   $('.navbar-toggler').on('click', function(e) {
@@ -293,16 +287,18 @@ $(function() {
    * Changes the navbar (globaltoc) height
    */
   function heightNavbar() {
+    noticeHeight = parseInt($('.no-latest-notice').outerHeight());
     if ($(window).width() >= 992) {
-      if (documentScroll <= navbarTop) {
-        $('#navbar').css({'padding-top': (noticeHeight + navbarTop - documentScroll) + 'px'});
-        $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - ' + noticeHeight + 'px + ' + documentScroll + 'px)'});
+      if (!$('body').hasClass('scrolled')) {
+        navbarTop = parseInt($('#header').outerHeight());
+        $('#navbar').css({'padding-top': (navbarTop - documentScroll) + 'px'});
+        $('#navbar-globaltoc').css({'height': 'calc(100vh - ' + (parseInt($('#navbar .search_main').outerHeight()) + parseInt($('#header').outerHeight())) + 'px + ' + documentScroll + 'px)', 'padding-top': 0});
       } else {
-        $('#navbar').css({'padding-top': noticeHeight});
-        $('#navbar-globaltoc').css({'height': 'calc(100vh - 152px - ' + noticeHeight + 'px + ' + navbarTop + 'px)'});
+        $('#navbar').css({'padding-top': parseInt($('.no-latest-notice').outerHeight())+'px'});
+        $('#navbar-globaltoc').css({'height': 'calc(100vh - ' + noticeHeight + 'px - ' + parseInt($('#header-sticky').outerHeight()) + 'px)', 'padding-top': 0});
       }
-      $('#navbar-globaltoc').css({'padding-top': 0});
     } else {
+      navbarTop = parseInt($('#header-sticky').outerHeight());
       if (documentScroll <= navbarTop) {
         $('#navbar').css({'padding-top': 0});
         $('#navbar-globaltoc').css({'padding-top': (noticeHeight + 100) + 'px'});
@@ -310,18 +306,6 @@ $(function() {
         $('#navbar').css({'padding-top': 0});
         $('#navbar-globaltoc').css({'padding-top': (noticeHeight + 52) + 'px'});
       }
-    }
-  }
-
-  /**
-   * Changes the "top" value of sticky header
-   */
-  function headerSticky() {
-    const documentScroll = $(window).scrollTop();
-    if (documentScroll >= (noticeHeight + 100)) {
-      $('#header-sticky').css({'top': noticeHeight});
-    } else {
-      $('#header-sticky').css({'top': '-52px'});
     }
   }
 
