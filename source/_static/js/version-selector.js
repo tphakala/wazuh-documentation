@@ -134,28 +134,25 @@ jQuery(function($) {
     */
   function checkLatestDocs() {
     const thisVersion = DOCUMENTATION_OPTIONS.VERSION;
-    let latestVersion = currentVersion;
+    const latestVersion = currentVersion;
     let page = '';
     if ( thisVersion !== latestVersion ) {
-      const pageID = document.querySelector('#page');
-      pageID.classList.add('no-latest-docs');
-    } else {
-      latestVersion = 'current';
-    }
+      const pageElement = document.querySelector('#page');
+      pageElement.classList.add('no-latest-docs');
+      /* Updates link to the latest version with the correct path */
+      page = document.location.pathname;
+      if ( page[page.length-1] == '/') {
+        page = page+'index.html';
+      }
+      if ( page.indexOf(thisVersion) != -1 ) {
+        page = page.split('/'+thisVersion)[1];
+      } else if ( page.indexOf('current') != -1 ) {
+        page = page.split('/current')[1];
+      }
 
-    /* Updates link to the latest version with the correct path */
-    page = document.location.pathname;
-    if ( page[page.length-1] == '/') {
-      page = page+'index.html';
+      const link = document.querySelector('.link-latest');
+      link.setAttribute('href', 'https://' + window.location.hostname + '/' + latestVersion + page);
     }
-    if ( page.indexOf(thisVersion) != -1 ) {
-      page = page.split('/'+thisVersion)[1];
-    } else if ( page.indexOf('current') != -1 ) {
-      page = page.split('/current')[1];
-    }
-
-    const link = document.querySelector('.link-latest');
-    link.setAttribute('href', 'https://' + window.location.hostname + '/' + latestVersion + page);
   }
 
   /**
