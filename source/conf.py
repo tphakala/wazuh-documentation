@@ -523,6 +523,7 @@ def setup(app):
 
 exclude_doc = ["not_found"]
 list_compiled_html = []
+list_compiled_html_removed_content = []
 
 def finish_and_clean(app, exception):
     ''' Performs the final tasks after the compilation '''
@@ -553,7 +554,13 @@ def finish_and_clean(app, exception):
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
     ''' Runs once per page, storing the pagename (full page path) extracted from the context '''
     if templatename == "page.html" and pagename not in exclude_doc:
-        list_compiled_html.append(context['pagename']+'.html')
+        meta = context['meta']
+        if isinstance(meta,dict):
+            meta_key = meta.keys()
+            if 'orphan' in meta_key:
+                list_compiled_html_removed_content.append(context['pagename']+'.html')
+            else:
+                list_compiled_html.append(context['pagename']+'.html')
     else:
         pass
         
@@ -579,6 +586,11 @@ def creating_file_list(app, exception):
         with open(build_path+'/.doclist', 'w') as doclist_file:
             list_text = separator.join(list_compiled_html)
             doclist_file.write(list_text)
+            
+        # Create .nodoclist file
+        with open(build_path+'/.nodoclist', 'w') as nodoclist_file:
+            removed_list_text = separator.join(list_compiled_html_removed_content)
+            nodoclist_file.write(removed_list_text)
 
         # Create release sitemap file
         with open(build_path+'/'+sitemap_version+'-sitemap.xml', 'w') as sitemap_file:

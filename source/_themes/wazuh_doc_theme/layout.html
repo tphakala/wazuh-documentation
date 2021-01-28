@@ -16,6 +16,12 @@
 {%- else %}
   {%- set titlesuffix = "" %}
 {%- endif %}
+{%- set is_orphan = False %}
+{%- if meta is mapping %}
+  {%- if meta.get('orphan') == '' %}
+    {%- set is_orphan = True %}
+  {%- endif %}
+{%- endif %}
 
 {%- macro css() %}
   <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
@@ -57,8 +63,12 @@
   <meta name="twitter:title" content="{{ pagetitle|e + titlesuffix }}" />
   <meta name="twitter:description" content="User manual, installation and configuration guides. Learn how to get the most out of the Wazuh platform." />
   <meta name="twitter:image" content="{{ theme_wazuh_doc_url + '/' + version + '/_static/img/wazuh-docs-card.png' }}" />
-
+  
   {{- metatags }}
+  
+  {%- if is_orphan == True %}
+  <meta name="robots" content="noindex">
+  {%- endif %}
 
   {% block htmltitle %}
       <title>{{ pagetitle|e }}{{ titlesuffix }}</title>
